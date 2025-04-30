@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Tickets - {{ match.team_1 }} vs {{ match.team_2 }}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ticket.css') }}">
+
+
+</head>
+<body>
+<!-- ticket detail -->
+<div class="container">
+    <div class="seat-legend">
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #0d6efd;"></div>
+            <span>Available</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #198754;"></div>
+            <span>Selected</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #6c757d;"></div>
+            <span>Booked</span>
+        </div>
+    </div>
+
+    <h2 class="text-center mb-4">Book Tickets for {{ match.team_1 }} vs {{ match.team_2 }}</h2>
+    <p class="text-center text-muted">Venue: {{ match.venue }} | Date: {{ match.date }}</p>
+     <!-- customer detail -->
+    <form method="POST" id="bookingForm">
+        <div class="mb-3">
+            <label for="name" class="form-label">Your Name</label>
+            <input type="text" name="name" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Your Email</label>
+            <input type="email" name="email" class="form-control" required>
+        </div>
+
+        <!-- Stand Selection -->
+        <h4 class="mt-4 mb-3">Select Stand Tier</h4>
+        <div class="stand-options">
+            <div class="stand-option" data-stand="premium">
+                <h4>Premium Stand</h4>
+                <div class="price">₹10000</div>
+                <p>Best views with premium amenities</p>
+            </div>
+            <div class="stand-option" data-stand="standard">
+                <h4>Standard Stand</h4>
+                <div class="price">₹4000</div>
+                <p>Great views at standard price</p>
+            </div>
+            <div class="stand-option" data-stand="economy">
+                <h4>Economy Stand</h4>
+                <div class="price">₹1500</div>
+                <p>Basic seating at affordable price</p>
+            </div>
+        </div>
+
+        <input type="hidden" name="selected_stand" id="selectedStand" value="">
+
+        <!-- Seat Selection Area -->
+        <div id="noStandSelected">
+            <i class="fas fa-arrow-up fa-2x mb-3"></i>
+            <p>Please select a stand tier to view available seats</p>
+        </div>
+
+        <div class="seat-selection" id="premium-seats" style="display: none;">
+            <h4>Premium Stand Seats</h4>
+            <p class="text-muted">Select your seats (₹10000 per seat)</p>
+            <div class="seat-grid">
+                {% for seat in premium_seats %}
+                    <label class="seat {% if seat in booked %}booked{% endif %}">
+                        <input type="checkbox" name="seats" value="{{ seat }}" {% if seat in booked %}disabled{% endif %}>
+                        {{ seat }}
+                        <span class="seat-tooltip">{{ seat }} - Premium</span>
+                    </label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="seat-selection" id="standard-seats" style="display: none;">
+            <h4>Standard Stand Seats</h4>
+            <p class="text-muted">Select your seats (₹4000 per seat)</p>
+            <div class="seat-grid">
+                {% for seat in standard_seats %}
+                    <label class="seat {% if seat in booked %}booked{% endif %}">
+                        <input type="checkbox" name="seats" value="{{ seat }}" {% if seat in booked %}disabled{% endif %}>
+                        {{ seat }}
+                        <span class="seat-tooltip">{{ seat }} - Standard</span>
+                    </label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="seat-selection" id="economy-seats" style="display: none;">
+            <h4>Economy Stand Seats</h4>
+            <p class="text-muted">Select your seats (₹1500 per seat)</p>
+            <div class="seat-grid">
+                {% for seat in economy_seats %}
+                    <label class="seat {% if seat in booked %}booked{% endif %}">
+                        <input type="checkbox" name="seats" value="{{ seat }}" {% if seat in booked %}disabled{% endif %}>
+                        {{ seat }}
+                        <span class="seat-tooltip">{{ seat }} - Economy</span>
+                    </label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-success px-4 py-2" id="bookButton" disabled>
+                <i class="fas fa-ticket-alt me-2"></i>Book Selected Seats
+            </button>
+            <a href="{{ url_for('match_fixtures') }}" class="btn btn-secondary ms-3 py-2">
+                <i class="fas fa-arrow-left me-2"></i>Back to Matches
+            </a>
+        </div>
+    </form>
+</div>
+
+<!-- Modal for confirmation -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="confirmationModalLabel">
+                    <i class="fas fa-check-circle me-2"></i>Confirm Your Booking
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <div class="confirmation-icon">
+                    <i class="fas fa-ticket-alt"></i>
+                </div>
+                <h4>Review Your Booking Details</h4>
+                <p>Please confirm your ticket selection before proceeding.</p>
+
+                <div class="booking-details">
+                    <h5>Booking Summary</h5>
+                    <p><span class="detail-label">Match:</span> {{ match.team_1 }} vs {{ match.team_2 }}</p>
+                    <p><span class="detail-label">Venue:</span> {{ match.venue }}</p>
+                    <p><span class="detail-label">Date:</span> {{ match.date }}</p>
+                    <p><span class="detail-label">Name:</span> <span id="confirmedName"></span></p>
+                    <p><span class="detail-label">Email:</span> <span id="confirmedEmail"></span></p>
+                    <p><span class="detail-label">Stand:</span> <span id="confirmedStand"></span></p>
+                    <p><span class="detail-label">Seats:</span> <span id="confirmedSeats"></span></p>
+                    <p><span class="detail-label">Total:</span> ₹<span id="confirmedTotal"></span></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="confirmBookingBtn">
+                    <i class="fas fa-check-circle me-2"></i>Confirm & Book Tickets
+                </button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i>Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="successModalLabel">
+                    <i class="fas fa-check-circle me-2"></i>Booking Successful!
+                </h5>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const bookingForm = document.getElementById('bookingForm');
+        const confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+        const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+        const confirmBookingBtn = document.getElementById('confirmBookingBtn');
+
+        // Stand selection handling
+        document.querySelectorAll('.stand-option').forEach(option => {
+            option.addEventListener('click', () => {
+                // Remove selected class from all options
+                document.querySelectorAll('.stand-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+
+                // Add selected class to clicked option
+                option.classList.add('selected');
+
+                // Hide all seat selections and show the selected one
+                document.querySelectorAll('.seat-selection').forEach(selection => {
+                    selection.style.display = 'none';
+                });
+                document.getElementById('noStandSelected').style.display = 'none';
+
+                const stand = option.dataset.stand;
+                document.getElementById(`${stand}-seats`).style.display = 'block';
+                document.getElementById('selectedStand').value = stand;
+
+                // Enable book button if seats are selected
+                updateBookButtonState();
+            });
+        });
+
+        // Seat selection handling
+        document.querySelectorAll('.seat input[type="checkbox"]').forEach(box => {
+            box.addEventListener('change', () => {
+                const seatLabel = box.parentElement;
+                if (box.checked) {
+                    seatLabel.classList.add('selected');
+                } else {
+                    seatLabel.classList.remove('selected');
+                }
+                updateBookButtonState();
+            });
+        });
+
+        function updateBookButtonState() {
+            const hasStandSelected = document.getElementById('selectedStand').value !== '';
+            const hasSeatsSelected = document.querySelectorAll('input[name="seats"]:checked').length > 0;
+            document.getElementById('bookButton').disabled = !(hasStandSelected && hasSeatsSelected);
+        }
+
+        // Form submission handling - show confirmation modal first
+        bookingForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get form values
+            const name = document.querySelector('input[name="name"]').value;
+            const email = document.querySelector('input[name="email"]').value;
+            const selectedSeats = Array.from(document.querySelectorAll('input[name="seats"]:checked'))
+                .map(checkbox => checkbox.value);
+            const selectedStand = document.getElementById('selectedStand').value;
+
+            // Calculate total
+            const standPrices = {
+                'premium': 10000,
+                'standard': 4000,
+                'economy': 1500
+            };
+            const total = selectedSeats.length * standPrices[selectedStand];
+
+            // Update confirmation modal with booking details
+            document.getElementById('confirmedName').textContent = name;
+            document.getElementById('confirmedEmail').textContent = email;
+            document.getElementById('confirmedStand').textContent =
+                selectedStand.charAt(0).toUpperCase() + selectedStand.slice(1) + ' Stand';
+            document.getElementById('confirmedSeats').textContent = selectedSeats.join(', ');
+            document.getElementById('confirmedTotal').textContent = total;
+
+            // Show confirmation modal
+            confirmationModal.show();
+        });
+
+        // Handle final confirmation
+        confirmBookingBtn.addEventListener('click', function() {
+            // Hide confirmation modal
+            confirmationModal.hide();
+
+            // Show loading state
+            confirmBookingBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Processing...';
+            confirmBookingBtn.disabled = true;
+
+            // Simulate server processing (in real app, this would be an AJAX call)
+            setTimeout(() => {
+                // Submit the form
+                bookingForm.submit();
+
+                // In a real app, you would handle the response and show success modal
+                // successModal.show();
+            }, 1500);
+        });
+
+        // If coming from POST request (server-side rendering)
+        {% if request.method == 'POST' and not error %}
+            // Update success modal with booking details
+            document.getElementById('confirmedName').textContent = '{{ name }}';
+            document.getElementById('confirmedEmail').textContent = '{{ email }}';
+            document.getElementById('confirmedStand').textContent = '{{ stand_name }}';
+            document.getElementById('confirmedSeats').textContent = '{{ booked_seats }}';
+            document.getElementById('confirmedTotal').textContent = '{{ total_amount }}';
+
+            // Show success modal
+            successModal.show();
+        {% endif %}
+    });
+</script>
+</body>
+</html>

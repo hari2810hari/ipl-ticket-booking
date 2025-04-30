@@ -1,0 +1,35 @@
+player_name,image_url,player_type,matches,runs,strike_rate,wickets,economy_rate,team_name,team_logo,team
+
+MS Dhoni,ms_dhoni.jpg,Batsman,250,5082,137.8,2,7.2,Chennai Super Kings,csk_logo.jpg,CSK
+Matheesha Pathirana,Matheesha Pathirana.jpg,Bowler,120,56,85.3,150,6.8,CSK,csk_logo.jpg,CSK
+Rachin Ravindra,Rachin Ravindra.jpg,Allrounder,17,408,146.76,0,3.50,CSK,csk_logo.jpg,CSK
+Noor Ahmad,Noor Ahmad.jpg,Bowler,30,14,50,36,7.83,CSK,csk_logo.jpg,CSK
+Ravindra Jadeja,jadeja.jpg,Allrounder,247,3051,129.22,164,7.64,CSK,csk_logo.jpg,CSK
+Shivam Dube,Shivam Dube.jpg,Allrounder,72,1682,144.50,5,9.64,CSK,csk_logo.jpg,CSK
+
+
+
+
+
+Virat Kohli,virat_kohli.jpg,Batsman,237,7263,130.4,0,0,Royal Challengers Bangalore,rcb_logo.jpg,RCB
+Phil Salt,phil_salt.jpg,Batsman,120,56,85.3,150,6.8,RCB,rcb_logo.jpg,RCB
+
+
+
+
+
+
+Jasprit Bumrah,bumrah.jpg,Bowler,120,56,85.3,150,6.8,MI,mi_logo.jpg,MI
+Hardik Pandya,hardik.jpg,Allrounder,143,2608,146.02,75,9.09,MI,mi_logo.jpg,MI
+Rohit Sharma,rohit.jpg,Batsman,262,6684,131.09,15,7.49,MI,mi_logo.jpg,MI
+Surya Kumar Yadav,Surya Kumar.jpg,157,3833,145.58,0,0,MI,mi_logo.jpg,MI
+
+
+
+
+Jos Buttler,Jos_Buttler.jpg,Batsman,113,3800,148.09,0,0,GT,gt_logo.jpg,GT
+
+
+
+
+Nicholas Pooran,Nicholas Pooran.jpg,Batsman,83,2126,168.60,0,0,LSG,lsg_logo.jpg,LSG

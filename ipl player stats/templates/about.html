@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About IPL App | IPL Player Stats</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+</head>
+<body>
+<!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-cricket"></i>
+                IPL Player Stats
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/match_fixtures"><i class="fas fa-calendar-alt"></i> Match Fixtures</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="teamDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-users"></i> Teams
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/team/RCB"><i class="fas fa-tshirt" style="color: #FF0000;"></i> RCB</a></li>
+                            <li><a class="dropdown-item" href="/team/CSK"><i class="fas fa-tshirt" style="color: #FFFF00;"></i> CSK</a></li>
+                            <li><a class="dropdown-item" href="/team/MI"><i class="fas fa-tshirt" style="color: #004BA0;"></i> MI</a></li>
+                            <li><a class="dropdown-item" href="/team/SRH"><i class="fas fa-tshirt" style="color: #FF822A;"></i> SRH</a></li>
+                            <li><a class="dropdown-item" href="/team/GT"><i class="fas fa-tshirt" style="color: #0D4D9B;"></i> GT</a></li>
+                            <li><a class="dropdown-item" href="/team/LSG"><i class="fas fa-tshirt" style="color: #005DAB;"></i> LSG</a></li>
+                            <li><a class="dropdown-item" href="/team/KKR"><i class="fas fa-tshirt" style="color: #3A225D;"></i> KKR</a></li>
+                            <li><a class="dropdown-item" href="/team/DC"><i class="fas fa-tshirt" style="color: #004C93;"></i> DC</a></li>
+                            <li><a class="dropdown-item" href="/team/PBKS"><i class="fas fa-tshirt" style="color: #AA4545;"></i> PBKS</a></li>
+                            <li><a class="dropdown-item" href="/team/RR"><i class="fas fa-tshirt" style="color: #FF4C4C;"></i> RR</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+<!-- aabout header -->
+    <header class="about-header">
+        <div class="container about-header-content">
+            <h1>About IPL Player Stats</h1>
+            <p>Your ultimate destination for comprehensive Indian Premier League statistics, match fixtures, and ticket booking services.</p>
+        </div>
+    </header>
+<!-- about content -->
+    <div class="container about-content">
+        <div class="row mb-5">
+            <div class="col-md-8 mx-auto text-center">
+                <h2 class="mb-4">Our Mission</h2>
+                <p class="lead">To provide cricket enthusiasts with a seamless platform to access player statistics, match details, and ticket booking services for the Indian Premier League.</p>
+            </div>
+        </div>
+
+        <h2 class="text-center mb-4">Key Features</h2>
+        <div class="row g-4 mb-5">
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <i class="fas fa-user-friends"></i>
+                    <h3>Player Statistics</h3>
+                    <p>Detailed player profiles with comprehensive statistics including batting averages, strike rates, bowling figures, and more for all IPL teams.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <i class="fas fa-calendar-check"></i>
+                    <h3>Match Fixtures</h3>
+                    <p>Complete schedule of all IPL matches with venue information, timings, and team matchups. Never miss an important game again.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <i class="fas fa-ticket-alt"></i>
+                    <h3>Ticket Booking</h3>
+                    <p>Easy-to-use ticket booking system with seat selection for your favorite matches. Secure your spot in the stadium hassle-free.</p>
+                </div>
+            </div>
+        </div>
+<!-- project front & back end deatils -->
+        <div class="tech-stack">
+            <h2 class="text-center mb-4">Technology Stack</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="tech-item">
+                        <div class="tech-icon"><i class="fab fa-python"></i></div>
+                        <div>
+                            <h4>Flask</h4>
+                            <p>Python web framework used for building the backend of this application.</p>
+                        </div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-icon"><i class="fas fa-database"></i></div>
+                        <div>
+                            <h4>MySQL (XAMPP)</h4>
+                            <p>Relational database management system for storing all IPL data.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="tech-item">
+                        <div class="tech-icon"><i class="fab fa-html5"></i></div>
+                        <div>
+                            <h4>HTML5 & CSS3</h4>
+                            <p>Modern web technologies for creating responsive and interactive user interfaces.</p>
+                        </div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-icon"><i class="fab fa-js"></i></div>
+                        <div>
+                            <h4>JavaScript</h4>
+                            <p>Used for dynamic content and interactive features throughout the application.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>IPL Player Stats</h4>
+                    <p>Your one-stop destination for all IPL-related statistics and services.</p>
+                    <div class="social-links mt-3">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <!-- links -->
+                <div class="col-md-4">
+                    <h4>Quick Links</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/match_fixtures">Match Fixtures</a></li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/privacy_policy">Privacy Policy</a></li>
+                        <li><a href="/terms_of_service">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-envelope"></i> contact@iplstats.com</p>
+                    <p><i class="fas fa-phone"></i> +91 9080450136</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Madurai, India</p>
+                </div>
+            </div>
+            <hr class="mt-4 bg-light">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2025 IPL Player Stats. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Highlight current page in navbar
+        document.querySelectorAll('.nav-link').forEach(link => {
+            if(link.href === window.location.href) {
+                link.classList.add('active');
+                link.setAttribute('aria-current', 'page');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

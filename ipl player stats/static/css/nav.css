@@ -1,0 +1,228 @@
+:root {
+    --ipl-blue: #2c3e50;
+    --ipl-accent: #e74c3c;
+    --team-rcb: #FF0000;
+    --team-csk: #FFFF00;
+    --team-mi: #004BA0;
+    --team-srh: #FF822A;
+    --team-gt: #0D4D9B;
+    --team-lsg: #005DAB;
+    --team-kkr: #3A225D;
+    --team-dc: #004C93;
+    --team-pbks: #AA4545;
+    --team-rr: #FF4C4C;
+    --nav-gradient: linear-gradient(135deg, #1a1a2e 0%, #2c3e50 100%);
+    --nav-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    --transition-speed: 0.3s;
+    --navbar-height: 80px;
+}
+
+/* Navbar Base Styles */
+.navbar {
+    background: var(--nav-gradient) !important;
+    box-shadow: var(--nav-shadow);
+    height: var(--navbar-height);
+    padding: 0 2rem;
+    transition: all var(--transition-speed) ease;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar.scrolled {
+    height: 70px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px);
+    background: rgba(26, 26, 46, 0.95) !important;
+}
+
+/* Brand/Logo Styles */
+.navbar-brand {
+    font-weight: 700;
+    color: white !important;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.5px;
+    transition: all var(--transition-speed) ease;
+}
+
+.navbar-brand i {
+    font-size: 1.8rem;
+    margin-right: 12px;
+    color: #e74c3c; /* IPL accent color */
+    transition: transform 0.4s ease;
+}
+
+.navbar-brand:hover i {
+    transform: rotate(15deg) scale(1.1);
+    color: #f1c40f; /* Gold/yellow for cricket ball effect */
+}
+
+.navbar.scrolled .navbar-brand {
+    font-size: 1.3rem;
+}
+
+/* Navigation Links */
+.nav-link {
+    position: relative;
+    padding: 0.75rem 1.25rem !important;
+    margin: 0 0.5rem;
+    color: rgba(255, 255, 255, 0.85) !important;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: all var(--transition-speed) ease;
+    display: flex;
+    align-items: center;
+}
+
+.nav-link i {
+    margin-right: 8px;
+    font-size: 1.1rem;
+    transition: all var(--transition-speed) ease;
+}
+
+.nav-link:hover {
+    color: white !important;
+    transform: translateY(-2px);
+}
+
+.nav-link:hover i {
+    color: var(--ipl-accent);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--ipl-accent);
+    border-radius: 2px;
+    transition: width var(--transition-speed) ease;
+}
+
+.nav-link:hover::after {
+    width: 60%;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    margin-top: 8px;
+    background: rgba(26, 26, 46, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transform-origin: top center;
+    animation: fadeIn 0.25s ease-out;
+}
+
+.dropdown-item {
+    color: rgba(255, 255, 255, 0.85) !important;
+    padding: 0.75rem 1.5rem !important;
+    font-weight: 500;
+    transition: all var(--transition-speed) ease;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.dropdown-item i {
+    margin-right: 10px;
+    font-size: 1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.dropdown-item:hover {
+    background: rgba(231, 76, 60, 0.15) !important;
+    color: white !important;
+    padding-left: 1.75rem !important;
+    transform: translateX(5px);
+}
+
+/* Team-specific colors in dropdown */
+.dropdown-item[href*="RCB"]:hover { background: rgba(var(--team-rcb), 0.2) !important; }
+.dropdown-item[href*="CSK"]:hover { background: rgba(var(--team-csk), 0.2) !important; color: #333 !important; }
+.dropdown-item[href*="MI"]:hover { background: rgba(var(--team-mi), 0.2) !important; }
+.dropdown-item[href*="SRH"]:hover { background: rgba(var(--team-srh), 0.2) !important; }
+.dropdown-item[href*="GT"]:hover { background: rgba(var(--team-gt), 0.2) !important; }
+.dropdown-item[href*="LSG"]:hover { background: rgba(var(--team-lsg), 0.2) !important; }
+.dropdown-item[href*="KKR"]:hover { background: rgba(var(--team-kkr), 0.2) !important; }
+.dropdown-item[href*="DC"]:hover { background: rgba(var(--team-dc), 0.2) !important; }
+.dropdown-item[href*="PBKS"]:hover { background: rgba(var(--team-pbks), 0.2) !important; }
+.dropdown-item[href*="RR"]:hover { background: rgba(var(--team-rr), 0.2) !important; }
+
+/* Mobile Toggle Button */
+.navbar-toggler {
+    border: none;
+    padding: 0.5rem;
+    transition: all var(--transition-speed) ease;
+}
+
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.5);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255, 255, 255, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    transition: all var(--transition-speed) ease;
+}
+
+.navbar-toggler:hover .navbar-toggler-icon {
+    transform: rotate(90deg);
+}
+
+/* Mobile Menu Adjustments */
+@media (max-width: 992px) {
+    .navbar {
+        padding: 0 1.5rem;
+    }
+
+    .navbar-collapse {
+        background: var(--nav-gradient);
+        padding: 1rem;
+        margin-top: 10px;
+        border-radius: 8px;
+        box-shadow: var(--nav-shadow);
+    }
+
+    .nav-link {
+        padding: 0.75rem !important;
+        margin: 0.25rem 0;
+    }
+
+    .dropdown-menu {
+        background: rgba(40, 40, 70, 0.95);
+        box-shadow: none;
+        margin: 0.5rem 0;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Cricket-themed pulse animation for active link */
+@keyframes cricketPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.nav-link.active {
+    animation: cricketPulse 1.5s infinite;
+}

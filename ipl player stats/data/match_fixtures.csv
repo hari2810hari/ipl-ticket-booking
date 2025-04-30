@@ -1,0 +1,22 @@
+match_id,team_1,team_2,venue,date,time,seat_count,
+1,KKR,RCB,Eden Gardens-Kolkata,22-03-2025,7:30PM,100,
+2,SRH,RR,Rajiv Gandhi International Stadium-Hyderabad,23-03-2025,3:30PM,200
+3,CSK,MI,MA Chidambaram Stadium-Chennai,23-03-2025,7:30PM,200
+4,DC,LSG,Dr YS Rajasekhara Reddy ACA-VDCA Cricket Stadium-Visakhapatnam,24-03-2025,7:30PM,1000
+5,GT,PBKS,Narendra Modi Stadium-Ahmedabad,25-03-2025,7:30PM,150
+6,RR,KKR,ACA Stadium-Guwahati,26-03-2025,7:30PM,100
+7,SRH,LSG,Rajiv Gandhi International Stadium-Hyderabad,27-03-2025,7:30PM,200
+8,CSK,RCB,MA Chidambaram Stadium-Chennai,28-03-2025,7:30PM,200
+9,GT,MI,Narendra Modi Stadium-Ahmedabad,29-03-2025,7:30PM
+10,DC,SRH,Dr YS Rajasekhara Reddy ACA-VDCA Cricket Stadium-Visakhapatnam,30-03-2025,3:30PM
+11,RR,CSK,ACA Stadium-Guwahati,30-03-2025,7:30PM
+12,MI,KKR,Wankhede Stadium-Mumbai,31-03-2025,7:30PM
+13,LSG,PBKS,Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium-Lucknow,01-04-2025,7:30PM
+14,RCB,GT,M Chinnaswamy Stadium-Bengaluru,02-04-2025,7:30PM
+15,KKR,SRH,Eden Gardens-Kolkata,03-04-2025,7:30PM
+16,LSG,MI,Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium-Lucknow,04-04-2025,7:30PM
+17,CSK,DC,MA Chidambaram Stadium-Chennai,05-04-2025,3:30PM
+18,PBKS,RR,New PCA Stadium-New Chandigarh,05-04-2025,7:30PM
+19,SRH,GT,Rajiv Gandhi International Stadium-Hyderabad,06-04-2025,7:30PM
+20,MI,RCB,Wankhede Stadium-Mumbai,07-04-2025,7:30PM
+
